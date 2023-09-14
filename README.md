@@ -1,7 +1,10 @@
 ## About
 
-This project was created with [express-generator-typescript](https://github.com/seanpmaxwell/express-generator-typescript).
+This is a general 15-day project to learn or explore Express js
 
+## NOTE:
+Copy the development.env.example to development.env
+add your MongoDB connection string to get a successful connection
 
 ## Available Scripts
 
