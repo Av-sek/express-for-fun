@@ -2,7 +2,7 @@ import { Router } from 'express';
 import jetValidator from 'jet-validator';
 
 import Paths from '../constants/Paths';
-import UserRoutes from './UserRoutes';
+import {productRouter} from './productRoutes';
 
 
 // **** Variables **** //
@@ -11,15 +11,8 @@ const apiRouter = Router(),
   validate = jetValidator();
 
 
-// ** Add UserRouter ** //
-
-const userRouter = Router();
-
-// Get all users
-
-
-// Add UserRouter
-apiRouter.use(Paths.Users.Base, userRouter);
+// routes //
+apiRouter.use(Paths.Products.Base, productRouter);
 
 
 // **** Export default **** //
