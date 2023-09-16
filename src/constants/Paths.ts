@@ -12,4 +12,12 @@ export default {
     Update: '/update',
     Delete: '/delete/:id',
   },
+  Products: {
+    Base: '/products',
+    Get: '/',
+    Retrieve: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
+  },
 } as const;
