@@ -12,6 +12,11 @@ export default {
     Update: '/update',
     Delete: '/delete/:id',
   },
+  Auth: {
+    Base: '/auth',
+    Login: '/login',
+    Register: '/register',
+  },
   Products: {
     Base: '/products',
     Get: '/',

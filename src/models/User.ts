@@ -1,3 +1,4 @@
+import { roles } from "@src/constants/auth";
 import mongoose from "mongoose";
 
 import { Schema, Document, Model } from "mongoose";
@@ -17,7 +18,7 @@ const UserSchema = new Schema({
   role: {
     type: String,
     required: false,
-    enum: ["admin", "user"],
+    enum: roles,
     default: "user",
   },
   created_at: { type: Date, default: Date.now },

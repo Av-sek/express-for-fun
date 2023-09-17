@@ -1,5 +1,4 @@
 import HttpStatusCodes from "@src/constants/HttpStatusCodes";
-import { validationResult } from "express-validator";
 import {
   getAll,
   getOne,
@@ -22,7 +21,6 @@ export const getAllProducts = async (req: IReq, res: IRes) => {
 
 export const getOneProduct = async (req: IReq, res: IRes) => {
   try {
-    console.log("I am here");
     const product = await getOne(req.params.id);
     res.status(HttpStatusCodes.OK).json(product);
   } catch (err) {
