@@ -15,7 +15,6 @@ export const create = (product: IProduct) => {
 
 export const update = async (id: string, product: IProduct) => {
   const productToUpdate = await ProductModel.findByIdAndUpdate(id, product, {new: true});
-  console.log(productToUpdate)
   return productToUpdate;
 };
 

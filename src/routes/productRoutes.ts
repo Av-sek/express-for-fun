@@ -1,4 +1,5 @@
 import Paths from "@src/constants/Paths";
+import { isAuthenticatedOrReadOnly } from "@src/middleware/auth";
 import {
   productRetrieveValidators,
   productCreateValidators,
@@ -15,6 +16,7 @@ import {
 import { Router } from "express";
 
 export const productRouter = Router();
+productRouter.use(isAuthenticatedOrReadOnly);
 
 productRouter.get(Paths.Products.Get, getAllProducts);
 productRouter.get(
