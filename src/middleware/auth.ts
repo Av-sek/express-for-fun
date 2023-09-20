@@ -44,3 +44,14 @@ export const isAuthenticatedOrReadOnly = async (req: IReq, res: IRes, next: Next
         })
     }
 }
+
+export const isAuthenticated = async (req: IReq, res: IRes, next: NextFunction) => {
+    if(req.user){
+        next();
+    }
+    else{
+        res.status(401).json({
+            message: "Unauthorized"
+        })
+    }
+}

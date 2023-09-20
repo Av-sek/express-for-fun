@@ -25,4 +25,8 @@ export default {
     Update: '/:id',
     Delete: '/:id',
   },
+  User: {
+    Base: '/user',
+    Profile: '/profile',
+  }
 } as const;

@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import { Schema, Document, Model } from "mongoose";
 export interface IUser {
   username: string;
+  bio: string;
   email: string;
   password: string;
   role: string;
@@ -14,12 +15,14 @@ export interface IUser {
 const UserSchema = new Schema({
   username: { type: String, required: false, unique: true },
   email: { type: String, required: false, unique: true },
-  password: { type: String, required: false },
+  bio: { type: String, required: false },
+  password: { type: String, select: false },
   role: {
     type: String,
     required: false,
     enum: roles,
     default: "user",
+    select: false,
   },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
