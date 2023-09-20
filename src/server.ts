@@ -7,7 +7,7 @@ import morgan from 'morgan';
 import path from 'path';
 import helmet from 'helmet';
 import express, { Request, Response, NextFunction } from 'express';
-import logger from 'jet-logger';
+
 
 import 'express-async-errors';
 
@@ -18,9 +18,10 @@ import EnvVars from '@src/constants/EnvVars';
 import HttpStatusCodes from '@src/constants/HttpStatusCodes';
 
 import { NodeEnvs } from '@src/constants/misc';
-import { RouteError } from '@src/other/classes';
+import { RouteError } from '@src/errors/routeError';
 
 import { verifyToken } from './middleware/auth';
+import { globalErrorHandler } from './middleware/errorHandler';
 
 
 // **** Variables **** //
@@ -50,24 +51,13 @@ if (EnvVars.NodeEnv === NodeEnvs.Production.valueOf()) {
 
 // Add APIs, must be after middleware
 app.use(Paths.Base, BaseRouter);
+app.all('*', (req: Request, __: Response, next: NextFunction) => {
+  const err = new RouteError(`Route ${req.originalUrl} for ${req.method} not found`)
+  next(err);
+});
 
 // Add error handler
-app.use((
-  err: Error,
-  _: Request,
-  res: Response,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  next: NextFunction,
-) => {
-  if (EnvVars.NodeEnv !== NodeEnvs.Test.valueOf()) {
-    logger.err(err, true);
-  }
-  let status = HttpStatusCodes.BAD_REQUEST;
-  if (err instanceof RouteError) {
-    status = err.status;
-  }
-  return res.status(status).json({ error: err.message });
-});
+app.use(globalErrorHandler);
 
 
 // ** Front-End Content ** //
@@ -89,6 +79,7 @@ app.get('/', (_: Request, res: Response) => {
 app.get('/users', (_: Request, res: Response) => {
   return res.sendFile('users.html', { root: viewsDir });
 });
+
 
 
 
